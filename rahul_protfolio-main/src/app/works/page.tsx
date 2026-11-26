@@ -1,214 +1,195 @@
-// app/projects/page.tsx
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import Link from 'next/link'
-import { FilmIcon, StarIcon, GlobeAltIcon, CubeIcon, ArrowLeftIcon } from '@/components/icons'
+import { motion } from 'framer-motion'
+import { ArrowLeftIcon } from '@/components/icons'
 
-const projects = [
+// The background generates random star positions in the browser.
+const SolarSystemBackground = dynamic(
+  () =>
+    import('@/components/SolarSystem').then(
+      (module) => module.SolarSystemBackground
+    ),
+  { ssr: false }
+)
+
+type Project = {
+  id: number
+  title: string
+  description: string
+  status: string
+  tech: string
+  year: string
+  image: string
+  repoPreview?: string
+  links: {
+    label: string
+    href: string
+    isDemo?: boolean
+  }[]
+}
+
+const projects: Project[] = [
   {
     id: 1,
-    title: "CIAK",
-    description: "Telegram bot for finding movie theaters and showtimes",
-    status: "Inactive",
-    tech: "Node.js, Telegram API",
-    year: "2023",
-    mockupColor: "bg-blue-400",
-    icon: <FilmIcon className="h-8 w-8 text-white" />
+    title: 'Ticket Nen BD',
+    description:
+      'I built a public demo of an event-ticketing platform for Bangladesh. ' +
+      'Visitors can switch roles to draft an event as an organiser, publish it as an admin, and reserve a ticket as a buyer. ' +
+      'The buyer can then download a PDF ticket with a QR code. ' +
+      'I tested that journey with Playwright and configured Render to deploy updates after the GitHub Actions checks pass.',
+    status: 'Public demo',
+    tech: 'React, Node.js, Express, MongoDB, Playwright, GitHub Actions, Render',
+    year: '2026',
+    image: '/projImg/ticket-nen-bd-portfolio.png',
+    repoPreview:
+      'https://opengraph.githubassets.com/1/2ndjoy/ticket-nen-bd-portfolio',
+    links: [
+      {
+        label: 'Live Preview',
+        href: 'https://ticket-nen-bd-demo.onrender.com/',
+        isDemo: true,
+      },
+      {
+        label: 'GitHub Repository',
+        href: 'https://github.com/2ndjoy/ticket-nen-bd-portfolio',
+      },
+      {
+        label: 'CI Checks',
+        href: 'https://github.com/2ndjoy/ticket-nen-bd-portfolio/actions/workflows/ci.yml',
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: 'WorkFlowHub',
+    description:
+      'On a three-person team, I added status filtering to a Django API and React interface. ' +
+      'I integrated it with a teammate’s pagination so users could select a status, load more items, and keep seeing only matching results.',
+    status: 'Team project · Auckland Institute of Studies',
+    tech: 'Django REST Framework, React, Playwright, GitHub Actions',
+    year: '2026',
+    image: '/projImg/workflowhub.png',
+    repoPreview:
+      'https://opengraph.githubassets.com/1/kondor256/ais-cicd-workflowhub',
+    links: [
+      {
+        label: 'Live Preview',
+        href: 'https://workflowhub-frontend.onrender.com/',
+        isDemo: true,
+      },
+      {
+        label: 'My Filtering PR',
+        href: 'https://github.com/kondor256/ais-cicd-workflowhub/pull/52',
+      },
+      {
+        label: 'Team Repository',
+        href: 'https://github.com/kondor256/ais-cicd-workflowhub',
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: 'StudySphere',
+    description:
+      'I independently built a student workspace for tracking assignments, writing notes, and organising course materials. ' +
+      'I developed the React frontend and Node.js API and set up automated deployments.',
+    status: 'Independent project',
+    tech: 'React, Node.js, Express, MongoDB, GitHub Actions',
+    year: '2026',
+    image: '/projImg/studysphere.png',
+    repoPreview: 'https://opengraph.githubassets.com/1/2ndjoy/studysphere-',
+    links: [
+      {
+        label: 'Live Preview',
+        href: 'https://studysphere-mocha.vercel.app/',
+        isDemo: true,
+      },
+      {
+        label: 'GitHub Repository',
+        href: 'https://github.com/2ndjoy/studysphere-',
+      },
+      {
+        label: 'CI Checks',
+        href: 'https://github.com/2ndjoy/studysphere-/actions/workflows/studysphere-ci.yml',
+      },
+    ],
   },
   {
     id: 2,
-    title: "STARGAZER",
-    description: "Astronomy app for tracking celestial events",
-    status: "Active",
-    tech: "React Native, NASA API",
-    year: "2024",
-    mockupColor: "bg-indigo-400",
-    icon: <StarIcon className="h-8 w-8 text-white" />
+    title: 'Kather Ghor',
+    description:
+      'An online furniture marketplace where users can buy and sell furniture, manage listings, advertise products, and track sales performance.',
+    status: 'Deployed Demo',
+    tech: 'MERN Stack, Tailwind CSS',
+    year: '2022',
+    image: '/projImg/katherghor.png',
+    links: [
+      {
+        label: 'Live Preview',
+        href: 'https://katherghor.netlify.app/',
+        isDemo: true,
+      },
+      {
+        label: 'GitHub Client',
+        href: 'https://github.com/2ndjoy/kather-ghor/tree/main/client-side',
+      },
+      {
+        label: 'GitHub Server',
+        href: 'https://github.com/2ndjoy/kather-ghor/tree/main/server-side',
+      },
+    ],
   },
   {
     id: 3,
-    title: "NEBULA",
-    description: "3D space visualization tool for educators",
-    status: "Beta",
-    tech: "Three.js, WebGL",
-    year: "2023",
-    mockupColor: "bg-blue-400",
-    icon: <GlobeAltIcon className="h-8 w-8 text-white" />
+    title: 'Find Basha',
+    description:
+      'A rental and housing platform for searching homes, posting rental ads, managing listings, and connecting landlords with tenants.',
+    status: 'Deployed Demo',
+    tech: 'MERN Stack, Tailwind CSS',
+    year: '2023',
+    image: '/projImg/findbasha.png',
+    links: [
+      {
+        label: 'Live Preview',
+        href: 'https://findbasha.netlify.app/',
+        isDemo: true,
+      },
+      {
+        label: 'GitHub Client',
+        href: 'https://github.com/2ndjoy/newBashaVara-main',
+      },
+      {
+        label: 'GitHub Server',
+        href: 'https://github.com/2ndjoy/Basha-vara-in-sylhet-server',
+      },
+    ],
   },
   {
     id: 4,
-    title: "QUANTUM",
-    description: "Physics simulation playground",
-    status: "Active",
-    tech: "Rust, WebAssembly",
-    year: "2024",
-    mockupColor: "bg-green-400",
-    icon: <CubeIcon className="h-8 w-8 text-white" />
-  }
+    title: 'Eduvoyage',
+    description:
+      'A Java-based educational application powered by Firebase for real-time data management, authentication, and cloud integration.',
+    status: 'Deployed Demo',
+    tech: 'Java, Firebase',
+    year: '2024',
+    image: '/projImg/eduvoyage.png',
+    links: [
+      {
+        label: 'GitHub Client',
+        href: 'https://github.com/2ndjoy/eduVoyage_v2',
+      },
+    ],
+  },
 ]
 
-function SolarSystemBackground() {
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      <motion.div 
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-20 h-20 rounded-full bg-yellow-400 shadow-2xl">
-          <div className="w-full h-full rounded-full bg-yellow-200/30 animate-pulse" />
-          <div className="absolute inset-0 rounded-full bg-yellow-300/20 blur-xl scale-150" />
-          <div className="absolute inset-0 rounded-full bg-orange-300/10 blur-2xl scale-200" />
-        </div>
-      </motion.div>
+function ProjectCard({ project }: { project: Project }) {
+  const [showRepoPreview, setShowRepoPreview] = useState(false)
+  const repoPreview = showRepoPreview ? project.repoPreview : undefined
 
-      {/* Mercury */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-32 h-32 relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-3 h-3 rounded-full bg-gray-400 shadow-lg" />
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/10" />
-        </div>
-      </motion.div>
-
-      {/* Venus */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-48 h-48 relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-4 h-4 rounded-full bg-yellow-300 shadow-lg">
-              <div className="w-full h-full rounded-full bg-yellow-100/30 blur-sm" />
-            </div>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/5" />
-        </div>
-      </motion.div>
-
-      {/* Earth */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-64 h-64 relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-5 h-5 rounded-full bg-blue-400 shadow-lg">
-              <div className="w-full h-full rounded-full bg-blue-200/40 blur-sm" />
-            </div>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/5" />
-        </div>
-      </motion.div>
-
-      {/* Mars */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-80 h-80 relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-4 h-4 rounded-full bg-red-500 shadow-lg">
-              <div className="w-full h-full rounded-full bg-red-300/40 blur-sm" />
-            </div>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/5" />
-        </div>
-      </motion.div>
-
-      {/* Jupiter */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-96 h-96 relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-8 h-8 rounded-full bg-orange-400 shadow-xl">
-              <div className="w-full h-full rounded-full bg-orange-200/30 blur-sm" />
-              <div className="absolute inset-1 rounded-full border-t border-b border-orange-600/30" />
-            </div>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/5" />
-        </div>
-      </motion.div>
-
-      {/* Saturn */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="w-[28rem] h-[28rem] relative">
-          <motion.div 
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="relative">
-              <div className="w-7 h-7 rounded-full bg-yellow-300 shadow-xl">
-                <div className="w-full h-full rounded-full bg-yellow-100/30 blur-sm" />
-              </div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12">
-                <div className="absolute inset-0 rounded-full border border-white/20" />
-                <div className="absolute inset-1 rounded-full border border-white/15" />
-              </div>
-            </div>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border border-white/5" />
-        </div>
-      </motion.div>
-
-      {[...Array(50)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white rounded-full"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ 
-            duration: 2 + Math.random() * 3, 
-            repeat: Infinity, 
-            delay: Math.random() * 2 
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-function ProjectCard({ project }: { project: typeof projects[0] }) {
   return (
     <motion.div
       className="relative backdrop-blur-lg bg-white/5 rounded-xl border border-white/10 overflow-hidden group"
@@ -222,13 +203,17 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
             <h3 className="text-2xl font-bold text-blue-400">
               {project.title}
             </h3>
+
             <p className="text-white/70">{project.description}</p>
-            
+
             <div className="flex items-center gap-3">
-              <div className={`w-2 h-2 rounded-full ${
-                project.status === "Active" ? "bg-green-400 animate-pulse" : 
-                project.status === "Beta" ? "bg-yellow-400" : "bg-gray-400"
-              }`} />
+              <div
+                className={`w-2 h-2 rounded-full ${
+                  project.status === 'Active'
+                    ? 'bg-green-400 animate-pulse'
+                    : 'bg-gray-400'
+                }`}
+              />
               <span className="text-white/70 text-sm">{project.status}</span>
             </div>
 
@@ -242,39 +227,58 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
                 <p className="text-white/80">{project.year}</p>
               </div>
             </div>
-            <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 250 }}
-          >
-            <Link 
-              href={`/projects/${project.id}`}
-              className="inline-block mt-6 px-4 py-2 text-sm text-white bg-white/10 backdrop-blur-lg rounded-lg hover:bg-white/20 transition-all w-fit"
-            >
-              View Details
-            </Link>
-            </motion.div>
+
+            <div className="flex gap-4 mt-6 flex-wrap">
+              {project.links.map((link) => (
+                <motion.div
+                  key={link.href}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 250 }}
+                >
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`px-4 py-2 text-sm text-white backdrop-blur-lg rounded-lg transition-all ${
+                      link.isDemo
+                        ? 'bg-blue-500/20 hover:bg-blue-500/40'
+                        : 'bg-white/10 hover:bg-white/20'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="flex items-center justify-center">
           <div className="relative w-full max-w-md">
             <div className="relative rounded-lg border-8 border-slate-700 bg-slate-800 overflow-hidden aspect-video">
-              <div className={`absolute inset-0 ${project.mockupColor}/20 flex items-center justify-center`}>
-                <div className="text-center p-6">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${project.mockupColor} flex items-center justify-center`}>
-                    {project.icon}
-                  </div>
-                  <h3 className="text-white text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-white/70 text-sm">Loading interface...</p>
-                </div>
-              </div>
+              <Image
+                src={repoPreview ?? project.image}
+                alt={
+                  repoPreview
+                    ? `${project.title} GitHub repository preview`
+                    : `${project.title} screenshot`
+                }
+                fill
+                sizes="(max-width: 528px) 85vw, 448px"
+                className="object-cover"
+                unoptimized={Boolean(repoPreview)}
+                onError={
+                  project.repoPreview && !showRepoPreview
+                    ? () => setShowRepoPreview(true)
+                    : undefined
+                }
+              />
             </div>
-            
-            <div className="w-full h-4 bg-slate-700 mx-auto rounded-b-lg"></div>
-            
-            <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-blue-400/10 blur-lg"></div>
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-blue-400/10 blur-lg"></div>
+
+            <div className="w-full h-4 bg-slate-700 mx-auto rounded-b-lg" />
+            <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-blue-400/10 blur-lg" />
+            <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-blue-400/10 blur-lg" />
           </div>
         </div>
       </div>
@@ -299,19 +303,14 @@ export default function ProjectsPage() {
           href="/"
           className="flex items-center gap-2 text-white/70 hover:text-white/90 transition-colors group backdrop-blur-lg bg-white/5 px-3 py-2 rounded-lg border border-white/10"
         >
-          <motion.div
-            whileHover={{ x: -4 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            <ArrowLeftIcon className="h-5 w-5 group-hover:text-blue-300 transition-colors" />
-          </motion.div>
+          <ArrowLeftIcon className="h-5 w-5 group-hover:text-blue-300 transition-colors" />
           <span className="text-sm font-medium">Back to Orbit</span>
         </Link>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 py-24 space-y-12 relative z-10">
-        <motion.h1 
-          className="text-4xl font-bold text-center mb-12  text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400  animate-pulse"
+        <motion.h1
+          className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -323,21 +322,6 @@ export default function ProjectsPage() {
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
-        </div>
-        <div className='grid justify-center items-center gap-3 m-2'>
-           <h2 className="font-semibold text-xl text-white animate-bounce">Got a project in mind? Let’s make it happen!</h2>
-         
-        <div className='flex justify-center'>
-          <motion.button
-                className="inline-flex items-center gap-2 px-9 py-3 text-xl bg-gradient-to-r from-blue-400 to-purple-400  rounded text-white font-semibold text-sm hover:bg-blue-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link href="/start-a-project">
-                Start a project
-                </Link>
-              </motion.button>
-        </div>
         </div>
       </div>
     </div>

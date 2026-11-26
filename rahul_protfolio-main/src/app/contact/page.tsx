@@ -85,7 +85,7 @@ export default function ContactPage() {
               href="mailto:baker0003locked@gmail.com"
               className="inline-block text-white/90 hover:text-white font-medium transition-colors text-2xl mb-1"
             >
-              baker0003locked@gmail.com
+              rahulchakrabartyjoy15@gmail.com
             </a>
 
             <h2 className="text-xl mt-6 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4 animate-bounce">
@@ -94,20 +94,43 @@ export default function ContactPage() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            {["LinkedIn", "Dribbble", "Twitter", "GitHub"].map((name) => (
-              <motion.a
-                key={name}
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white/90 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-inner ring-1 ring-white/10 hover:ring-white/20 transition-all"
-              >
-                {name}
-              </motion.a>
-            ))}
+
+            <motion.a
+              href="https://www.linkedin.com/in/rahul-chakrabarty-joy-47a95b209/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white/90 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-inner ring-1 ring-white/10 hover:ring-white/20 transition-all"
+            >
+              LinkedIn
+            </motion.a>
+
+            <motion.a
+              href="https://github.com/2ndjoy"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white/90 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-inner ring-1 ring-white/10 hover:ring-white/20 transition-all"
+            >
+              GitHub
+            </motion.a>
+
+            <motion.a
+              href="https://www.instagram.com/throughmyeyes_024/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-white/90 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-inner ring-1 ring-white/10 hover:ring-white/20 transition-all"
+            >
+              Instagram
+            </motion.a>
+
           </div>
         </motion.div>
       </main>

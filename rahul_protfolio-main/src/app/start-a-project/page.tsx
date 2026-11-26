@@ -6,27 +6,27 @@ import { useState } from "react";
 import { motion } from 'framer-motion'
 import ContactCTA from "@/components/ContactCTA";
 
-const DESIGN_COST = 4000;
-const CMS_COST = 4000;
+const DESIGN_COST = 800;
+const CMS_COST = 800;
 const TOPPINGS_COSTS = {
-  "2D animations": 2000,
-  "3D animations": 3000,
-  Ecommerce: 3000,
-  "Logins & profiles": 2500,
-  Mapping: 1500,
-  "Realtime data": 3000,
-  "Site search": 1000,
-  "Performance Optimization": 2000,
-  "PWA Support": 2000,
-  "Accessibility Audit": 1500,
-  "Security Hardening": 2000,
-  "GDPR Compliance": 1500,
-  "Backup System": 1000,
-  "CRM Integration": 3000,
-  "Multilingual Support": 2500,
-  "CI/CD Pipeline": 2000,
-  "UX Testing": 1500,
-  "Maintenance Retainer": 1000
+  "2D animations": 400,
+  "3D animations": 600,
+  Ecommerce: 700,
+  "Logins & profiles": 500,
+  Mapping: 300,
+  "Realtime data": 600,
+  "Site search": 200,
+  "Performance Optimization": 400,
+  "PWA Support": 350,
+  "Accessibility Audit": 300,
+  "Security Hardening": 400,
+  "GDPR Compliance": 300,
+  "Backup System": 200,
+  "CRM Integration": 600,
+  "Multilingual Support": 500,
+  "CI/CD Pipeline": 400,
+  "UX Testing": 300,
+  "Maintenance Retainer": 200
 };
 
 const FRONTEND_OPTIONS = [
@@ -83,25 +83,25 @@ export default function StartAProjectPage() {
   const [design, setDesign] = useState("I already have a design");
   const [cms, setCms] = useState("I don't need a CMS");
   const [frontend, setFrontend] = useState(FRONTEND_OPTIONS[0]);
-const [toppings, setToppings] = useState<string[]>([]);
+  const [toppings, setToppings] = useState<string[]>([]);
 
   const [mateRate, setMateRate] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [activeCategory, setActiveCategory] = useState("all");
 
-function toggleTopping(topping: string) {
-  if (toppings.includes(topping)) {
-    setToppings(toppings.filter((t) => t !== topping));
-  } else {
-    setToppings([...toppings, topping]);
+  function toggleTopping(topping: string) {
+    if (toppings.includes(topping)) {
+      setToppings(toppings.filter((t) => t !== topping));
+    } else {
+      setToppings([...toppings, topping]);
+    }
   }
-}
 
 
   // Calculate total in USD
   let total_usd = 0;
-  if (design === "I need a design (+$4000)") total_usd += DESIGN_COST;
-  if (cms === "I need a CMS (+$4000)") total_usd += CMS_COST;
+  if (design === "I need a design (+$800)") total_usd += DESIGN_COST;
+  if (cms === "I need a CMS (+$800)") total_usd += CMS_COST;
   toppings.forEach((t) => {
     total_usd += TOPPINGS_COSTS[t] || 0;
   });
@@ -111,7 +111,7 @@ function toggleTopping(topping: string) {
   const total_in_currency = total_usd * EXCHANGE_RATES[currency];
 
   const getCurrencySymbol = () => {
-    switch(currency) {
+    switch (currency) {
       case 'EUR': return '€';
       case 'GBP': return '£';
       case 'BDT': return '৳';
@@ -121,7 +121,7 @@ function toggleTopping(topping: string) {
 
   // Filter toppings by category
   const getFilteredToppings = () => {
-    switch(activeCategory) {
+    switch (activeCategory) {
       case 'performance':
         return PERFORMANCE_OPTIONS;
       case 'security':
@@ -154,15 +154,15 @@ function toggleTopping(topping: string) {
       "UX Testing": "Usability testing, A/B testing, heatmaps",
       "Maintenance Retainer": "Bug fixes, updates, security patches"
     };
-    
-   return descriptions[topping] || 
+
+    return descriptions[topping] ||
       (topping === "2D animations" ? "SVG, Lottie, Framer Motion, GSAP, etc." :
-      topping === "3D animations" ? "ThreeJS, React Three Fiber, etc." :
-      topping === "Ecommerce" ? "Shopify /main Stripe checkout, Paypal etc." :
-      topping === "Logins & profiles" ? "Logins, registrations, profiles, etc." :
-      topping === "Mapping" ? "Mapping, geolocation, etc." :
-      topping === "Realtime data" ? "Realtime interactions, websockets, etc." :
-      topping === "Site search" ? "Algolia, MeiliSearch, etc." : "");
+        topping === "3D animations" ? "ThreeJS, React Three Fiber, etc." :
+          topping === "Ecommerce" ? "Shopify /main Stripe checkout, Paypal etc." :
+            topping === "Logins & profiles" ? "Logins, registrations, profiles, etc." :
+              topping === "Mapping" ? "Mapping, geolocation, etc." :
+                topping === "Realtime data" ? "Realtime interactions, websockets, etc." :
+                  topping === "Site search" ? "Algolia, MeiliSearch, etc." : "");
   };
 
   return (
@@ -190,7 +190,7 @@ function toggleTopping(topping: string) {
 
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Central Sun */}
-        <div 
+        <div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           style={{ animation: 'rotate 30s linear infinite' }}
         >
@@ -207,7 +207,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 15s linear infinite' }}
         >
           <div className="w-32Luca h-32 relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 15s linear infinite' }}
             >
@@ -223,7 +223,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 25s linear infinite' }}
         >
           <div className="w-48 h-48 relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 25s linear infinite' }}
             >
@@ -241,7 +241,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 40s linear infinite' }}
         >
           <div className="w-64 h-64 relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 40s linear infinite' }}
             >
@@ -259,7 +259,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 60s linear infinite' }}
         >
           <div className="w-80 h-80 relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 60s linear infinite' }}
             >
@@ -277,7 +277,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 90s linear infinite' }}
         >
           <div className="w-96 h-96 relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 90s linear infinite' }}
             >
@@ -296,7 +296,7 @@ function toggleTopping(topping: string) {
           style={{ animation: 'rotate 120s linear infinite' }}
         >
           <div className="w-[28rem] h-[28rem] relative">
-            <div 
+            <div
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{ animation: 'counter-rotate 120s linear infinite' }}
             >
@@ -348,11 +348,12 @@ function toggleTopping(topping: string) {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-7xl font-bold mb-6  text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse">
-            Launch Your Vision 
+            Launch Your Vision
           </h1>
           <p className="text-2xl text-blue-200 mb-8 font-light">
-            Transform your ideas into stellar digital experiences
-          </p>
+     Freelance services are temporarily on hold. I am currently seeking internship and part-time opportunities in New Zealand.
+     <br /> You can still explore my services and pricing for future references.
+     </p>
           <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-blue-500 mx-auto rounded-full"></div>
         </div>
 
@@ -365,7 +366,7 @@ function toggleTopping(topping: string) {
                 🎨 Design Magic
               </h3>
               <div className="space-y-4">
-                {["I already have a design", "I need a design (+$4000)"].map((option) => (
+                {["I already have a design", "I need a design (+$800)"].map((option) => (
                   <label key={option} className="flex items-center cursor-pointer group">
                     <div className="relative">
                       <input
@@ -376,11 +377,10 @@ function toggleTopping(topping: string) {
                         onChange={() => setDesign(option)}
                         className="sr-only"
                       />
-                      <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
-                        design === option 
-                          ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50' 
-                          : 'border-gray-400 group-hover:border-blue-300'
-                      }`}>
+                      <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${design === option
+                        ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50'
+                        : 'border-gray-400 group-hover:border-blue-300'
+                        }`}>
                         {design === option && (
                           <div className="w-2 h-2 bg-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                         )}
@@ -398,7 +398,7 @@ function toggleTopping(topping: string) {
                 ⚙️ Backend/ CMS
               </h3>
               <div className="space-y-4">
-                {["I don't need a CMS", "I need a CMS (+$4000)"].map((option) => (
+                {["I don't need a CMS", "I need a CMS (+$800)"].map((option) => (
                   <label key={option} className="flex items-center cursor-pointer group">
                     <div className="relative">
                       <input
@@ -409,11 +409,10 @@ function toggleTopping(topping: string) {
                         onChange={() => setCms(option)}
                         className="sr-only"
                       />
-                      <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
-                        cms === option 
-                          ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50' 
-                          : 'border-gray-400 group-hover:border-blue-300'
-                      }`}>
+                      <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${cms === option
+                        ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50'
+                        : 'border-gray-400 group-hover:border-blue-300'
+                        }`}>
                         {cms === option && (
                           <div className="w-2 h-2 bg-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                         )}
@@ -448,81 +447,74 @@ function toggleTopping(topping: string) {
               <h3 className="text-2xl font-bold mb-6 text-blue-300 flex items-center gap-3">
                 ✨ Professional Features
               </h3>
-              
+
               {/* Category Filter */}
               <div className="flex flex-wrap gap-2 mb-6">
                 <button
                   onClick={() => setActiveCategory("all")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "all"
-                      ? "bg-blue-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-blue-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "all"
+                    ? "bg-blue-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-blue-200"
+                    }`}
                 >
                   All Features
                 </button>
                 <button
                   onClick={() => setActiveCategory("performance")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "performance"
-                      ? "bg-blue-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-blue-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "performance"
+                    ? "bg-blue-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-blue-200"
+                    }`}
                 >
                   Performance
                 </button>
                 <button
                   onClick={() => setActiveCategory("security")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "security"
-                      ? "bg-green-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-green-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "security"
+                    ? "bg-green-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-green-200"
+                    }`}
                 >
                   Security
                 </button>
                 <button
                   onClick={() => setActiveCategory("integrations")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "integrations"
-                      ? "bg-blue-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-blue-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "integrations"
+                    ? "bg-blue-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-blue-200"
+                    }`}
                 >
                   Integrations
                 </button>
                 <button
                   onClick={() => setActiveCategory("devops")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "devops"
-                      ? "bg-yellow-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-yellow-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "devops"
+                    ? "bg-yellow-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-yellow-200"
+                    }`}
                 >
                   DevOps
                 </button>
                 <button
                   onClick={() => setActiveCategory("ux")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "ux"
-                      ? "bg-red-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-red-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "ux"
+                    ? "bg-red-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-red-200"
+                    }`}
                 >
                   UX
                 </button>
                 <button
                   onClick={() => setActiveCategory("support")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === "support"
-                      ? "bg-teal-500/90 text-white"
-                      : "bg-white/5 hover:bg-white/10 text-teal-200"
-                  }`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === "support"
+                    ? "bg-teal-500/90 text-white"
+                    : "bg-white/5 hover:bg-white/10 text-teal-200"
+                    }`}
                 >
                   Support
                 </button>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-4">
                 {getFilteredToppings().map((topping) => (
                   <label key={topping} className="flex items-start cursor-pointer group bg-white/5 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-blue-300/30">
@@ -533,11 +525,10 @@ function toggleTopping(topping: string) {
                         onChange={() => toggleTopping(topping)}
                         className="sr-only"
                       />
-                      <div className={`w-6 h-6 rounded-lg border-2 transition-all duration-300 ${
-                        toppings.includes(topping)
-                          ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50' 
-                          : 'border-gray-400 group-hover:border-blue-300'
-                      }`}>
+                      <div className={`w-6 h-6 rounded-lg border-2 transition-all duration-300 ${toppings.includes(topping)
+                        ? 'border-blue-400 bg-blue-400 shadow-lg shadow-blue-400/50'
+                        : 'border-gray-400 group-hover:border-blue-300'
+                        }`}>
                         {toppings.includes(topping) && (
                           <svg className="w-4 h-4 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -568,11 +559,10 @@ function toggleTopping(topping: string) {
                     onChange={() => setMateRate(!mateRate)}
                     className="sr-only"
                   />
-                  <div className={`w-8 h-8 rounded-xl border-2 transition-all duration-300 ${
-                    mateRate
-                      ? 'border-yellow-400 bg-yellow-400 shadow-lg shadow-yellow-400/50' 
-                      : 'border-gray-400 group-hover:border-yellow-300'
-                  }`}>
+                  <div className={`w-8 h-8 rounded-xl border-2 transition-all duration-300 ${mateRate
+                    ? 'border-yellow-400 bg-yellow-400 shadow-lg shadow-yellow-400/50'
+                    : 'border-gray-400 group-hover:border-yellow-300'
+                    }`}>
                     {mateRate && (
                       <svg className="w-5 h-5 text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -596,7 +586,7 @@ function toggleTopping(topping: string) {
               <h3 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">
                 Place your order
               </h3>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between items-center p-3 bg-white/5 rounded-xl">
                   <span className="text-blue-200">Currency</span>
@@ -611,8 +601,8 @@ function toggleTopping(topping: string) {
                     <option value="BDT" className="bg-slate-800">BDT ৳</option>
                   </select>
                 </div>
-                
-                {design === "I need a design (+$4000)" && (
+
+                {design === "I need a design (+$800)" && (
                   <div className="flex justify-between items-center p-3 bg-blue-500/10 rounded-xl border border-blue-400/30">
                     <span className="text-blue-200">Design</span>
                     <span className="text-blue-300 font-semibold">
@@ -620,8 +610,8 @@ function toggleTopping(topping: string) {
                     </span>
                   </div>
                 )}
-                
-                {cms === "I need a CMS (+$4000)" && (
+
+                {cms === "I need a CMS (+$800)" && (
                   <div className="flex justify-between items-center p-3 bg-blue-500/10 rounded-xl border border-blue-400/30">
                     <span className="text-blue-200">CMS</span>
                     <span className="text-blue-300 font-semibold">
@@ -629,7 +619,7 @@ function toggleTopping(topping: string) {
                     </span>
                   </div>
                 )}
-                
+
                 {toppings.map((topping) => (
                   <div key={topping} className="flex justify-between items-center p-3 bg-blue-500/10 rounded-xl border border-blue-400/30">
                     <span className="text-blue-200 text-sm">{topping}</span>
@@ -638,7 +628,7 @@ function toggleTopping(topping: string) {
                     </span>
                   </div>
                 ))}
-                
+
                 {mateRate && (
                   <div className="flex justify-between items-center p-3 bg-yellow-500/10 rounded-xl border border-yellow-400/30">
                     <span className="text-yellow-200">Mate Discount</span>
@@ -646,44 +636,44 @@ function toggleTopping(topping: string) {
                   </div>
                 )}
               </div>
-              
+
               <div className="text-center p-6 bg-gradient-to-r from-blue-600/20 to-blue-600/20 rounded-2xl border border-blue-400/30 mb-8">
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">
                   {getCurrencySymbol()}{total_in_currency.toFixed(2)}
                 </div>
                 <div className="text-blue-200 text-sm mt-2">Total Investment</div>
               </div>
-              
+
               <div className="space-y-3 grid justify-center items-cente gap-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 250 }}
-          >
-              <span className="inline-block px-6 py-2 text-sm md:text-base font-semibold tracking-wide text-white/80 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded shadow-inner shadow-white/10 ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
-               Email Quote
-              </span>
-          </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 250 }}
-              > <span className="inline-block px-6 py-2 text-sm md:text-base font-semibold tracking-wide text-blue-900 hover:text-white bg-white/50 hover:bg-white/10 backdrop-blur-md rounded shadow-inner shadow-white/10 ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
-                Save Quote
-              </span>
-              </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 250 }}
+                >
+                  <span className="inline-block px-6 py-2 text-sm md:text-base font-semibold tracking-wide text-white/80 hover:text-white bg-white/10 hover:bg-white/20 backdrop-blur-md rounded shadow-inner shadow-white/10 ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                    Email Quote
+                  </span>
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 250 }}
+                > <span className="inline-block px-6 py-2 text-sm md:text-base font-semibold tracking-wide text-blue-900 hover:text-white bg-white/50 hover:bg-white/10 backdrop-blur-md rounded shadow-inner shadow-white/10 ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                    Save Quote
+                  </span>
+                </motion.button>
 
 
 
-                  
+
               </div>
             </div>
             <div className="p-4 m-5 mt-10 grid justify-center items-center gap-3">
-            <h2 className="font-semibold text-xl animate-bounce">Would you like to hop on a Google Meet to explore your project together?</h2>
-            <div className="flex justify-center px-6 py-3 "><ContactCTA/></div>
+              <h2 className="font-semibold text-xl animate-bounce">Would you like to hop on a Google Meet to explore your project together?</h2>
+              <div className="flex justify-center px-6 py-3 "><ContactCTA /></div>
             </div>
-               
+
           </div>
         </div>
 
@@ -691,7 +681,7 @@ function toggleTopping(topping: string) {
         <footer className="mt-20 text-center">
           <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
             <p className="text-xl text-blue-200 mb-4 font-light italic animate-bounce">
-                Dream it. Design it. Deploy it. I’m ready when you are.
+              Temporarily on hold for freelance services. Currently seeking internship and part-time opportunities in New Zealand.
             </p>
           </div>
         </footer>

@@ -206,126 +206,127 @@ export default function SolarSystem() {
   }
 
   return (
-    <motion.div
-      ref={containerRef}
-      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden cursor-none"
-      onMouseMove={handleMove}
-      onTouchMove={handleMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      {/* Stars */}
-      {stars.map((s, i) => (
-        <motion.div
-          key={i}
-          className="absolute bg-white rounded-full"
-          style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size }}
-          animate={{ opacity: [0.2, 1, 0.2] }}
-          transition={{ repeat: Infinity, duration: 3, delay: s.delay }}
-        />
-      ))}
-
-      {/* Planet Rings */}
-      {planetsRef.current.map((p, i) => (
-        <div key={i} style={ringStyle(p.distance)} />
-      ))}
-
-      {/* Sun */}
+    <>
       <motion.div
-        className="absolute w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full shadow-[0_0_40px_15px_rgba(250,200,50,0.3)] pointer-events-none"
-        style={{
-          left: cursorPos.x - 24,
-          top: cursorPos.y - 24,
-        }}
-        animate={{
-          scale: isHovering ? [1, 1.1, 1] : 1,
-          rotate: isHovering ? 180 : 0,
-        }}
-        transition={{
-          scale: { duration: 2, repeat: Infinity },
-          rotate: { duration: 15, repeat: Infinity, ease: 'linear' },
-        }}
-      >
-        <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse" />
-      </motion.div>
-
-      {/* Planets */}
-      {planetsRef.current.map((p) => {
-        const { x, y } = getPos(p)
-        return (
-          <motion.div
-            key={p.id}
-            className={`absolute rounded-full border border-white/10 ${p.patternClass}`}
-            style={{
-              left: x,
-              top: y,
-              width: p.size,
-              height: p.size,
-              backgroundColor: p.color,
-            }}
-            animate={{ scale: isHovering ? 1.05 : 0.95 }}
-            transition={{ type: 'spring', stiffness: 150 }}
-          >
-            {p.name === 'Jupiter' && <div className="absolute -inset-4 rounded-full border border-white/10" />}
-            {p.name === 'Neptune' && <div className="absolute -inset-3 rounded-full border-t-2 border-blue-300/30" />}
-          </motion.div>
-        )
-      })}
-
-      {/* Intro Section */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center z-10 px-4"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
+        ref={containerRef}
+        className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden cursor-none"
+        onMouseMove={handleMove}
+        onTouchMove={handleMove}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className="text-center space-y-6">
-          <motion.h1
-            className="text-2xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 tracking-tight animate-bounce"
-            whileHover={{ letterSpacing: '0.02em' }}
-          >
-            Hi, I’m Joy
-          </motion.h1>
+        {/* Stars */}
+        {stars.map((s, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full"
+            style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size }}
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ repeat: Infinity, duration: 3, delay: s.delay }}
+          />
+        ))}
 
-          <motion.p
-            className="text-xl md:text-xl text-white/70 max-w-xl mx-auto px-4 font-light leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          >
-            I'm a passionate developer and creative thinker, available for freelance and full-time
-            opportunities. Let’s build something extraordinary together.
-          </motion.p>
+        {/* Planet Rings */}
+        {planetsRef.current.map((p, i) => (
+          <div key={i} style={ringStyle(p.distance)} />
+        ))}
 
-          <motion.nav
-            className="mt-10 flex flex-col items-center space-y-3"
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: {},
-              show: {
-                transition: {
-                  staggerChildren: 0.1,
+        {/* Sun */}
+        <motion.div
+          className="absolute w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full shadow-[0_0_40px_15px_rgba(250,200,50,0.3)] pointer-events-none"
+          style={{
+            left: cursorPos.x - 24,
+            top: cursorPos.y - 24,
+          }}
+          animate={{
+            scale: isHovering ? [1, 1.1, 1] : 1,
+            rotate: isHovering ? 180 : 0,
+          }}
+          transition={{
+            scale: { duration: 2, repeat: Infinity },
+            rotate: { duration: 15, repeat: Infinity, ease: 'linear' },
+          }}
+        >
+          <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse" />
+        </motion.div>
+
+        {/* Planets */}
+        {planetsRef.current.map((p) => {
+          const { x, y } = getPos(p)
+          return (
+            <motion.div
+              key={p.id}
+              className={`absolute rounded-full border border-white/10 ${p.patternClass}`}
+              style={{
+                left: x,
+                top: y,
+                width: p.size,
+                height: p.size,
+                backgroundColor: p.color,
+              }}
+              animate={{ scale: isHovering ? 1.05 : 0.95 }}
+              transition={{ type: 'spring', stiffness: 150 }}
+            >
+              {p.name === 'Jupiter' && <div className="absolute -inset-4 rounded-full border border-white/10" />}
+              {p.name === 'Neptune' && <div className="absolute -inset-3 rounded-full border-t-2 border-blue-300/30" />}
+            </motion.div>
+          )
+        })}
+
+        {/* Intro Section */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center z-10 px-4"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="text-center space-y-6">
+            <motion.h1
+              className="text-2xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 tracking-tight animate-bounce"
+              whileHover={{ letterSpacing: '0.02em' }}
+            >
+              Hi, I’m Rahul
+            </motion.h1>
+
+            <motion.p
+              className="text-xl md:text-xl text-white/70 max-w-xl mx-auto px-4 font-light leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              I'm a passionate developer and creative thinker, available for internships and part-time
+              opportunities. Let’s build something extraordinary together.
+            </motion.p>
+
+            <motion.nav
+              className="mt-10 flex flex-col items-center space-y-3"
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
                 },
-              },
-            }}
-          >
-            <hr />
-            {['Start a project', 'Works', 'Services', 'Journal', 'Contact', 'About'].map((label) => (
-              <motion.div
-                key={label}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 250 }}
-                variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
-                onClick={playClickSound}
-              >
-                <Link
-                  href={`/${label.toLowerCase().replace(/\s/g, '-')}`}
-                  className="
+              }}
+            >
+              <hr />
+              {['Start a project', 'Works', 'Services', 'Journal', 'Contact', 'About'].map((label) => (
+                <motion.div
+                  key={label}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 250 }}
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  onClick={playClickSound}
+                >
+                  <Link
+                    href={`/${label.toLowerCase().replace(/\s/g, '-')}`}
+                    className="
                     inline-block px-6 py-2
                     text-sm md:text-base font-semibold tracking-wide
                     text-white/90 hover:text-white
@@ -335,23 +336,39 @@ export default function SolarSystem() {
                     ring-1 ring-white/10 hover:ring-white/20
                     transition-all duration-300
                   "
-                >
-                  {label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.nav>
-        </div>
-      </motion.div>
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.nav>
+          </div>
+        </motion.div>
 
-      {/* Keyframes */}
-      <style>{`
+        {/* Keyframes */}
+        <style>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
         }
       `}</style>
 
-      <CosmicFooter />
-    </motion.div>
+
+      </motion.div>
+
+      <div className="hidden lg:block">
+
+        <br />
+        <br />
+        <br />
+
+        <CosmicFooter />
+      </div>
+
+
+      <div className="lg:hidden">
+
+        <CosmicFooter />
+      </div>
+    </>
   )
 }
